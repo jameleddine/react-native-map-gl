@@ -28,8 +28,16 @@ import indoorMapGeoJSON from './indoor_3d_map.json';
 
 MapboxGL.setAccessToken('pk.eyJ1IjoidWxmdGhlb2JhbGQiLCJhIjoiY2swZWc0ems2MGFyaTNjbDl0MzB0amJscyJ9.JnnfCNGRks-wMEqIYVlH_Q');
 
-// const App: () => React$Node = () => {
-  export default class App extends Component {
+const layerStyles = {
+  building: {
+    fillExtrusionOpacity: 0.5,
+    fillExtrusionHeight: ['get', 'height'],
+    fillExtrusionBase: ['get', 'base_height'],
+    fillExtrusionColor: ['get', 'color'],
+    // fillExtrusionColorTransition: {duration: 2000, delay: 0},
+  },
+};
+export default class App extends Component {
 render(){
 
 
@@ -51,6 +59,10 @@ render(){
             <MapboxGL.FillExtrusionLayer
               id="building3d"
               // style={layerStyles.building}
+            />
+            <MapboxGL.FillExtrusionLayer
+              id="building3d"
+              style={layerStyles.building}
             />
           </MapboxGL.ShapeSource>
         </MapboxGL.MapView>
