@@ -24,6 +24,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import MapboxGL from '@react-native-mapbox-gl/maps';
+import indoorMapGeoJSON from './indoor_3d_map.json';
 
 MapboxGL.setAccessToken('pk.eyJ1IjoidWxmdGhlb2JhbGQiLCJhIjoiY2swZWc0ems2MGFyaTNjbDl0MzB0amJscyJ9.JnnfCNGRks-wMEqIYVlH_Q');
 
@@ -37,6 +38,21 @@ render(){
           <MapboxGL.MapView
           ref={(c) => this._map = c}
           style={{flex: 1}}>
+            <MapboxGL.Camera
+            zoomLevel={16}
+            pitch={40}
+            heading={20}
+            centerCoordinate={[6.136737577322208, 49.60412210489483]}
+          />
+            <MapboxGL.ShapeSource
+            id="indoorBuildingSource"
+            shape={indoorMapGeoJSON}
+          >
+            <MapboxGL.FillExtrusionLayer
+              id="building3d"
+              // style={layerStyles.building}
+            />
+          </MapboxGL.ShapeSource>
         </MapboxGL.MapView>
         <Text>Hello</Text>
       </View>
